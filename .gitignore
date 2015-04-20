@@ -58,3 +58,6 @@ target/
 
 #Temporary files inside temp directory
 temp/*
+
+#Databases
+*.db
