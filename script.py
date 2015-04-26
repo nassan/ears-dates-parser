@@ -78,11 +78,16 @@ class GeneralManager(object):
 		print str(len(self.exceller.tickers_list)) + " total locations to parse:"
 		counter = 0
 		for ticker in self.exceller.tickers_list:
+			try:
 				self.browser.buildURL(ticker)
 				logging.info('Scraping: ' + self.browser.current_url)
 				self.browser.openURL()
 				self.browser.startScrape()
 				counter += 1
+			except Exception:
+				logging.warning("Error scraping:" + self.browser.current_url)
+				
+			finally:
 				print "Percentage completed:\t" + str((100 * float(counter))/float(len(self.exceller.tickers_list)))
 
 		self.browser.driver.close()
